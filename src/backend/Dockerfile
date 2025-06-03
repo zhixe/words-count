@@ -1,10 +1,10 @@
 # Build stage
 FROM golang:1.24.3-alpine AS build
 WORKDIR /app
-COPY src/backend/go.mod ./      # Copy go.mod from src/backend
+COPY src/backend/go.mod ./
 COPY src/backend/go.sum ./
 RUN go mod download
-COPY src/backend/*.go ./        # Copy all .go files from src/backend
+COPY src/backend/*.go ./
 RUN go build -o server .
 
 # Production stage

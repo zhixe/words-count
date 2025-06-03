@@ -1,0 +1,14 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f7f7;
+}
+.text-validation .ant-form-item-explain-error {
+  margin: 5px 0 5px 0;
+}

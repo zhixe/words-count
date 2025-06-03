@@ -1,0 +1,25 @@
+.footer-style {
+    width: 100%;
+    min-height: 32px;
+    padding: 0;
+    text-align: center;
+    font-size: 0.96rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    letter-spacing: 0.01em;
+    transition: background 0.2s;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    .footer-style {
+        font-size: 0.88rem;
+        min-height: 28px;
+    }
+}

@@ -1,0 +1,1 @@
+export const BACKEND_COUNT = import.meta.env.VITE_BACKEND_COUNT_ENDPOINT || "";

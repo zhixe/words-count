@@ -4,11 +4,11 @@ import TextArea from "antd/es/input/TextArea";
 import "./App.css";
 import 'antd/dist/reset.css';
 import Footer from "./component/Footer.tsx";
+import { BACKEND_COUNT } from "./_shared/constants";
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const API_URL = "http://localhost:8080/api/count";
 export default function App() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function App() {
         setLoading(true);
         setResult(null);
         try {
-            const resp = await fetch(API_URL, {
+            const resp = await fetch(BACKEND_COUNT, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values),

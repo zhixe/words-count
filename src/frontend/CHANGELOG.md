@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.5] - 2025-06-04
+## [0.0.5] - 2025-06-04
 ### Added
 - Dockerfile for Go backend, supporting multi-stage builds for small image size.
 - `.dockerignore` file to prevent extra files (source, modules) from being included in the final Docker image.

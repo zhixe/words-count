@@ -2,7 +2,9 @@ import React from "react";
 
 const Footer: React.FC = () => (
     <footer className="footer-style">
-        <small>Version: {__APP_VERSION__}</small>
+        <small style={{ fontWeight: "bold" }}>Version: {__APP_VERSION__}</small>
+        <span className="footer-divider">|</span>
+        <small>Last Update on {__APP_DATE__}</small>
     </footer>
 );
 

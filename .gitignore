@@ -1,0 +1,13 @@
+# Ignore JetBrains IDE settings
+.idea/
+
+# Ignore all .env files in subdirectories (but not the root one)
+**/.env
+
+**/.exe
+
+node_modules/
+
+package-lock.json/
+
+dist/

@@ -11,5 +11,4 @@ FROM alpine:3.19
 WORKDIR /app
 RUN apk add --no-cache tzdata
 COPY --from=build /app/server /app/
-COPY --from=build /app/static /app/static
 CMD ["./server"]

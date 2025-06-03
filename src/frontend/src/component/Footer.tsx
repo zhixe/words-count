@@ -4,7 +4,7 @@ const Footer: React.FC = () => (
     <footer className="footer-style">
         <small style={{ fontWeight: "bold" }}>Version: {__APP_VERSION__}</small>
         <span className="footer-divider">|</span>
-        <small>Last Update on {__APP_DATE__}</small>
+        <small>Last updated on {__APP_DATE__}</small>
     </footer>
 );
 

@@ -1,6 +1,29 @@
 # Changelog
 
-## [0.0.4] - 2024-06-03
+## [1.0.5] - 2025-06-04
+### Added
+- Dockerfile for Go backend, supporting multi-stage builds for small image size.
+- `.dockerignore` file to prevent extra files (source, modules) from being included in the final Docker image.
+- Netlify deployment instructions and fix for `dist/` publish directory.
+- Production-ready workflow: `.env.production`, Railway backend, and Netlify frontend now supported.
+- `sync-version.js` improvements to use `.cjs` for CommonJS compatibility (Node.js "type": "module" fix).
+
+### Changed
+- Refactored Vite and React index entrypoint to standard import pattern.
+- API endpoint usage now always via env variable (`VITE_BACKEND_COUNT_ENDPOINT`) and proper fetch.
+- Main Go backend logic cleaned up for production deployment (removed local debug, improved handler comments).
+- Updated instructions for Netlify and Railway deployment.
+
+### Fixed
+- Fixed MIME type error by always serving from `dist/` (never from raw src/).
+- Fixed 404 and routing errors on Netlify by building and publishing the correct folder.
+- Ensured proper character/line counting for all edge cases (multiple empty lines, mixed spaces).
+- Fixed CORS and POST/GET handler logic for Go backend API.
+- Fixed version not updating due to ESModule/CommonJS conflict.
+
+---
+
+## [0.0.4] - 2025-06-03
 ### Added
 - Automated version sync script: now updating `package.json`, both README.md files, and `backend/version.go` using the version in `CHANGELOG.md`.
 - Improved Go backend logic for accurate character and line counting, especially with empty lines and newlines.
@@ -17,7 +40,7 @@
 
 ---
 
-## [0.0.3] - 2024-06-02
+## [0.0.3] - 2025-06-02
 ### Added
 - Go backend: added endpoint for `/api/count` with CORS enabled.
 - Frontend: added reset button to the character/word count UI.
@@ -29,21 +52,21 @@
 
 ---
 
-## [0.0.2] - 2024-06-01
+## [0.0.2] - 2025-06-01
 ### Changed
 - Updated Ant Design to v5, React to v18.2 for best compatibility.
 - Documentation improvements in README.md for local setup.
 
 ---
 
-## [0.0.1] - 2024-05-30
+## [0.0.1] - 2025-05-30
 ### Added
 - Initial Go backend for character/word/line counting.
 - Vite + React + TypeScript + Ant Design frontend scaffolding.
 
 ---
 
-## [0.0.0] - 2024-05-28
+## [0.0.0] - 2025-05-28
 ### Added
 - Project scaffolded: initial file structure for mono-repo with `frontend/` and `backend/`.
 - Added first draft of `CHANGELOG.md`.

@@ -81,7 +81,12 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Words Count API is running!"))
+}
+
 func main() {
+	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/api/count", countHandler)
 	log.Println("Backend listening at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))

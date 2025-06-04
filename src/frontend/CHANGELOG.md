@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.6] - 2025-06-04
+### Added
+- **File upload support**: Users can now upload `.txt` files in the frontend. The content is read and loaded into the input automatically, supporting both manual and file-based text input.
+- Ant Design `<Upload />` integration, styled with upload icon and only allowing `.txt` files.
+- Example validation and user feedback if non-`.txt` files are uploaded.
+
+### Changed
+- TypeScript code quality improved: typed the file upload handler parameter as `RcFile` to resolve TS7006 warning.
+- FileReader event handling now safely asserts `e.target` to fix TS18047 ("possibly null") warning.
+
+### Fixed
+- No user-facing bugs reported; improved input safety and compatibility for repeated file uploads and refresh actions.
+
+---
+
 ## [0.0.5] - 2025-06-04
 ### Added
 - Dockerfile for Go backend, supporting multi-stage builds for small image size.

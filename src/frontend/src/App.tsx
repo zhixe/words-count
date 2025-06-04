@@ -46,6 +46,12 @@ export default function App() {
             message.error("Only .txt files are supported!");
             return false;
         }
+
+        if (file.size > 20 * 1024 * 1024) { // 20MB
+            message.error("File must be smaller than 20MB!");
+            return false;
+        }
+
         const reader = new FileReader();
         reader.onload = (e) => {
             if (!e.target) return;

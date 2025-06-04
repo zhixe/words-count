@@ -52,6 +52,9 @@ func countWords(character, countWithSpaces, countType string) int {
 }
 
 func countHandler(w http.ResponseWriter, r *http.Request) {
+	// Limit to 20MB (20 * 1024 * 1024 bytes)
+	r.Body = http.MaxBytesReader(w, r.Body, 20*1024*1024)
+
 	// Enable CORS for dev
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")

@@ -11,6 +11,7 @@ import { UploadOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 const { Option } = Select;
+const [fullFileText, setFullFileText] = useState<string>("");
 
 export default function App() {
     const [form] = Form.useForm();
@@ -21,10 +22,13 @@ export default function App() {
         setLoading(true);
         setResult(null);
         try {
+            // Use full file if present, otherwise the form value
+            const character = fullFileText || values.character;
+            const payload = { ...values, character };
             const resp = await fetch(BACKEND_COUNT, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(values),
+                body: JSON.stringify(payload),
             });
             if (!resp.ok) {
                 setLoading(false);
@@ -54,12 +58,11 @@ export default function App() {
         reader.onload = (e) => {
             if (!e.target) return;
             const text = e.target.result as string;
-            // Preview only first 500 lines, or 20,000 chars
+            setFullFileText(text); // Store the full content for submission
             const lines = text.split('\n');
             const preview = lines.slice(0, 500).join('\n').slice(0, 20000);
             form.setFieldsValue({ character: preview });
             message.info("Preview limited to first 500 lines. Full file will be counted.");
-            // Optionally: store full text in state to submit later, but not display!
         };
         reader.readAsText(file);
         return false;
@@ -111,6 +114,7 @@ export default function App() {
                                 onClick={() => {
                                     form.resetFields();
                                     setResult(null);
+                                    setFullFileText(""); // Clear the full file text
                                 }}
                             >
                                 Clear

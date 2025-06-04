@@ -52,7 +52,7 @@ func countWords(character, countWithSpaces, countType string) int {
 }
 
 func countHandler(w http.ResponseWriter, r *http.Request) {
-	// Limit to 30MB (50 * 1024 * 1024 bytes)
+	// Limit to 50MB (50 * 1024 * 1024 bytes)
 	r.Body = http.MaxBytesReader(w, r.Body, 50*1024*1024)
 
 	// Enable CORS for dev

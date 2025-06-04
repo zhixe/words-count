@@ -92,7 +92,7 @@ export default function App() {
                             <Option value="column">Column (Field)</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Text File:" style={{ marginBottom: 10 }}>
+                    <Form.Item label="Text File: (Max 20MB)" style={{ marginBottom: 10 }}>
                         <Upload
                             accept=".txt"
                             showUploadList={false}

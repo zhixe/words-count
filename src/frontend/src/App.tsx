@@ -103,7 +103,7 @@ export default function App() {
                                     setResult(null);
                                 }}
                             >
-                                Reset
+                                Clear
                             </Button>
                         </Space>
                     </Form.Item>

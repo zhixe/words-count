@@ -11,12 +11,12 @@ import { UploadOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 const { Option } = Select;
-const [fullFileText, setFullFileText] = useState<string>("");
 
 export default function App() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<number | null>(null);
+    const [fullFileText, setFullFileText] = useState<string>("");
 
     const onFinish = async (values: any) => {
         setLoading(true);

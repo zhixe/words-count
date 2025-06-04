@@ -56,7 +56,7 @@ export default function App() {
                             <Option value="column">Column (Field)</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item className="text-validation" label="text" name="character" rules={[{ required: true }]}>
+                    <Form.Item className="text-validation" label="Enter the text:" name="character" rules={[{ required: true, message: "Please provide some text!" }]}>
                         <TextArea rows={6} placeholder="Paste or type your text here..." />
                     </Form.Item>
                     <Form.Item>

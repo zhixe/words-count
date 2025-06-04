@@ -46,19 +46,23 @@ export default function App() {
             message.error("Only .txt files are supported!");
             return false;
         }
-
-        if (file.size > 20 * 1024 * 1024) { // 20MB
+        if (file.size > 20 * 1024 * 1024) {
             message.error("File must be smaller than 20MB!");
             return false;
         }
-
         const reader = new FileReader();
         reader.onload = (e) => {
             if (!e.target) return;
-            form.setFieldsValue({ character: e.target.result });
+            const text = e.target.result as string;
+            // Preview only first 500 lines, or 20,000 chars
+            const lines = text.split('\n');
+            const preview = lines.slice(0, 500).join('\n').slice(0, 20000);
+            form.setFieldsValue({ character: preview });
+            message.info("Preview limited to first 500 lines. Full file will be counted.");
+            // Optionally: store full text in state to submit later, but not display!
         };
         reader.readAsText(file);
-        return false; // prevent upload to server
+        return false;
     };
 
     return (

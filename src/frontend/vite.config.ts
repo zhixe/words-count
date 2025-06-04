@@ -28,7 +28,6 @@ function getChangelogInfo() {
 const { version, date } = getChangelogInfo();
 
 export default defineConfig({
-  // ... your existing config ...
   define: {
     __APP_VERSION__: JSON.stringify(version),
     __APP_DATE__: JSON.stringify(date),

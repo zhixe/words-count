@@ -50,7 +50,7 @@ export default function App() {
             message.error("Only .txt files are supported!");
             return false;
         }
-        if (file.size > 50 * 1024 * 1024) {
+        if (file.size > 5 * 1024 * 1024) {
             message.error("File must be smaller than 5MB!");
             return false;
         }

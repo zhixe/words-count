@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.7] - 2025-06-04
+### Added
+- **Footer now displays both version and full formatted date**: Date is extracted from `CHANGELOG.md` and automatically shown as “Month Day, Year” (e.g., “June 4, 2025”) in the frontend.
+- Dynamic date formatting using `toLocaleString` for maximum locale clarity.
+- Updated Vite build logic to inject both version and formatted date as global constants (`__APP_VERSION__`, `__APP_DATE__`).
+
+### Changed
+- Footer layout improved for clarity: shows version and last updated date with a divider.
+- Centralized date logic to avoid redundancy and ensure accuracy from single changelog source.
+
+### Fixed
+- Prevented any mismatch between displayed app version/date and source of truth in `CHANGELOG.md`.
+
+---
+
 ## [0.0.6] - 2025-06-04
 ### Added
 - **File upload support**: Users can now upload `.txt` files in the frontend. The content is read and loaded into the input automatically, supporting both manual and file-based text input.

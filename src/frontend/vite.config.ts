@@ -15,7 +15,8 @@ function getChangelogInfo() {
     let dateFormatted = 'unknown';
     try {
       const dateObj = new Date(dateRaw);
-      dateFormatted = dateObj.toLocaleString('en-US', { month: 'long', year: 'numeric' }); // "June 2025"
+      // Format: "June 4, 2025"
+      dateFormatted = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     } catch {
       dateFormatted = dateRaw;
     }

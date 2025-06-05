@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.9] - 2025-06-05
+### Added
+- **Per-word tOGGLE cASE:** The tOGGLE cASE transformation now changes each word so the first character is lowercase and the rest are uppercase (e.g., "HELLO WORLD" → "hELLO wORLD"). Repeatedly clicking "Apply" toggles between the transformed and original states without resetting the dropdown.
+- **Enhanced Capitalize Each Word:** Capitalize Each Word now properly normalizes all-uppercase words to capitalized form (e.g., "THIS IS A TEST" → "This Is A Test").
+- **Cycle Behavior for All Transformations:** When you click "Apply" repeatedly without changing the transformation, it toggles back and forth between the transformed and original text.
+
+### Fixed
+- **Edge Cases:** Improved handling of toggling transformations for various text patterns and restored input on Clear.
+- **Dropdown and Apply State:** Case transformation dropdown and Apply button now properly reset and cycle as expected after each operation.
+
 ## [0.0.8] - 2025-06-05
 ### Added
 - **Case Transformation Dropdown:** Added dropdown menu for sentence case, lowercase, UPPERCASE, Capitalize Each Word, and tOGGLE cASE above the input area.

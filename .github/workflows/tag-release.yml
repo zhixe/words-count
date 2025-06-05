@@ -1,7 +1,8 @@
-name: Tag Release
+name: Auto Tag Release
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ master ] # or main, or whichever branch you want
 
 jobs:
   tag:
@@ -15,7 +16,7 @@ jobs:
           VERSION=$(grep -m1 -Po '(?<=## \[)[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Create tag if not exists
+      - name: Create and push tag if not exists
         run: |
           if git rev-parse "v$VERSION" >/dev/null 2>&1; then
             echo "Tag v$VERSION already exists"

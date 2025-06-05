@@ -5,8 +5,8 @@
   "scripts": {
     "sync-version": "node sync-version.js",
     "tag-latest": "node release/tag-latest.js",
-    "dev": "npm run sync-version && npm run tag-latest && vite",
-    "build": "npm run sync-version && npm run tag-latest && vite build",
+    "dev": "npm run sync-version && vite",
+    "build": "npm run sync-version && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

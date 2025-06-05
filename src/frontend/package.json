@@ -5,6 +5,7 @@
   "scripts": {
     "sync-version": "node sync-version.js",
     "tag-latest": "node release/tag-latest.js",
+    "push-tag": "npm run tag-latest && git push --tags",
     "dev": "npm run sync-version && vite",
     "build": "npm run sync-version && vite build",
     "preview": "vite preview"

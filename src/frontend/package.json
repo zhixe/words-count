@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "sync-version": "node sync-version.js",
-    "dev": "npm run sync-version && vite",
-    "build": "npm run sync-version && vite build",
+    "tag-latest": "node scripts/tag-latest.js",
+    "dev": "npm run sync-version && npm run tag-latest && vite",
+    "build": "npm run sync-version && npm run tag-latest && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -136,27 +136,28 @@ export default function App() {
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Space style={{ marginLeft: 10, marginBottom: 12 }}>
-                            <Tooltip title="Count the characters in the input text or uploaded file">
-                                <Button type="primary" htmlType="submit" loading={loading}>
-                                    Count
-                                </Button>
-                            </Tooltip>
-                            <Tooltip title="Clear the input and results">
-                                <Button
-                                    onClick={() => {
-                                        form.resetFields();
-                                        setResult(null);
-                                        setFullFileText(""); // Clear the full file text
-                                        setCharacterValue(""); // Clear TextArea value
-                                        setCaseType(undefined); // Reset case type
-                                    }}
-                                >
-                                    Clear
-                                </Button>
-                            </Tooltip>
-                        </Space>
-                        <Space style={{ marginBottom: 12 }}>
+                        <div className="bottom-buttons">
+                            <Space>
+                                <Tooltip title="Count the characters in the input text or uploaded file">
+                                    <Button type="primary" htmlType="submit" loading={loading}>
+                                        Count
+                                    </Button>
+                                </Tooltip>
+                                <Tooltip title="Clear the input and results">
+                                    <Button
+                                        onClick={() => {
+                                            form.resetFields();
+                                            setResult(null);
+                                            setFullFileText(""); // Clear the full file text
+                                            setCharacterValue(""); // Clear TextArea value
+                                            setCaseType(undefined); // Reset case type
+                                        }}
+                                    >
+                                        Clear
+                                    </Button>
+                                </Tooltip>
+                            </Space>
+                            <Space>
                             <Select
                                 value={caseType}
                                 placeholder="Case Transformation"
@@ -214,6 +215,7 @@ export default function App() {
                                 </Button>
                             </Tooltip>
                         </Space>
+                        </div>
                     </Form.Item>
                 </Form>
                 {result !== null && (

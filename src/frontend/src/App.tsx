@@ -136,7 +136,7 @@ export default function App() {
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Space style={{ marginBottom: 12 }}>
+                        <Space style={{ marginLeft: 10, marginBottom: 12 }}>
                             <Tooltip title="Count the characters in the input text or uploaded file">
                                 <Button type="primary" htmlType="submit" loading={loading}>
                                     Count
@@ -156,7 +156,7 @@ export default function App() {
                                 </Button>
                             </Tooltip>
                         </Space>
-                        <Space style={{ marginLeft: 10, marginBottom: 12 }}>
+                        <Space style={{ marginBottom: 12 }}>
                             <Select
                                 value={caseType}
                                 placeholder="Case Transformation"
@@ -174,11 +174,15 @@ export default function App() {
                             <Tooltip title="Apply 'Case Transformation' to the input text">
                                 <Button
                                     type="default"
-                                    disabled={!characterValue.trim()}
+                                    disabled={!characterValue.trim() || !caseType}
                                     onClick={() => {
                                         const val = form.getFieldValue("character");
                                         if (!val || !val.trim()) {
                                             message.error("Please add input.");
+                                            return;
+                                        }
+                                        if (!caseType) {
+                                            message.error("Please select a case transformation.");
                                             return;
                                         }
                                         let newText = val;

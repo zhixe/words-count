@@ -1,1 +1,1 @@
-Current Version: 0.0.7
+Current Version: 0.0.8

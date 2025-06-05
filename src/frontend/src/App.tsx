@@ -19,6 +19,8 @@ export default function App() {
     const [fullFileText, setFullFileText] = useState<string>("");
     const [caseType, setCaseType] = useState<string | undefined>(undefined);
     const [characterValue, setCharacterValue] = useState("");
+    const [prevCharacterValue, setPrevCharacterValue] = useState<string>(""); // stores the "original" state for toggling
+    const [lastCaseType, setLastCaseType] = useState<string | undefined>(undefined); // stores the last transformation type
 
     const onFinish = async (values: any) => {
         setLoading(true);
@@ -51,15 +53,14 @@ export default function App() {
             .replace(/(^\s*\w|[\.\!\?]\s*\w)/g, (c) => c.toUpperCase());
     }
     function toCapitalizeEachWord(str: string) {
-        return str.replace(/\b\w/g, (c) => c.toUpperCase());
+        return str.replace(/\b\w+\b/g, (word) =>
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        );
     }
-    function toToggleCase(str: string) {
-        return str
-            .split("")
-            .map((c) =>
-                c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()
-            )
-            .join("");
+    function toToggleEachWord(str: string) {
+        return str.replace(/\b\w+\b/g, (word) =>
+            word.charAt(0).toLowerCase() + word.slice(1).toUpperCase()
+        );
     }
 
     // Helper to read file text and set into form
@@ -132,8 +133,11 @@ export default function App() {
                             onChange={e => {
                                 setCharacterValue(e.target.value);
                                 form.setFieldsValue({ character: e.target.value });
+                                setPrevCharacterValue("");          // Reset previous state
+                                setLastCaseType(undefined);         // Reset last transformation type
                             }}
                         />
+
                     </Form.Item>
                     <Form.Item>
                         <div className="bottom-buttons">
@@ -186,6 +190,35 @@ export default function App() {
                                             message.error("Please select a case transformation.");
                                             return;
                                         }
+                                        
+                                        // Special logic for "toggle" to cycle properly
+                                        if (caseType === "toggle") {
+                                            if (caseType === lastCaseType && prevCharacterValue) {
+                                                // If toggled, go back to original
+                                                form.setFieldsValue({ character: prevCharacterValue });
+                                                setCharacterValue(prevCharacterValue);
+                                                setPrevCharacterValue(val);
+                                                return;
+                                            }
+                                            // First time applying toggle or caseType changed
+                                            const toggled = toToggleEachWord(val);
+                                            setPrevCharacterValue(val);
+                                            setLastCaseType(caseType);
+                                            form.setFieldsValue({ character: toggled });
+                                            setCharacterValue(toggled);
+                                            setFullFileText("");
+                                            return;
+                                        }
+
+                                        // All other case transforms
+                                        if (caseType === lastCaseType && prevCharacterValue) {
+                                            // Cycle back to previous state
+                                            form.setFieldsValue({ character: prevCharacterValue });
+                                            setCharacterValue(prevCharacterValue);
+                                            setPrevCharacterValue(val); // update prev state
+                                            return;
+                                        }
+
                                         let newText = val;
                                         switch (caseType) {
                                             case "sentence":
@@ -200,15 +233,15 @@ export default function App() {
                                             case "capitalize":
                                                 newText = toCapitalizeEachWord(val);
                                                 break;
-                                            case "toggle":
-                                                newText = toToggleCase(val);
-                                                break;
+                                            // case "toggle": handled above
                                             default:
                                                 break;
                                         }
+                                        setPrevCharacterValue(val);
+                                        setLastCaseType(caseType);
                                         form.setFieldsValue({ character: newText });
-                                        setCharacterValue(newText);  // Update TextArea value
-                                        setFullFileText(""); // Optional: remove full file if user edits
+                                        setCharacterValue(newText);
+                                        setFullFileText("");
                                     }}
                                 >
                                     Apply

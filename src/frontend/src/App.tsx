@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Select, Typography, Form, Card, Space, message } from "antd";
+import {Button, Select, Typography, Form, Card, Space, message, Tooltip} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import "./App.css";
 import 'antd/dist/reset.css';
@@ -17,6 +17,8 @@ export default function App() {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<number | null>(null);
     const [fullFileText, setFullFileText] = useState<string>("");
+    const [caseType, setCaseType] = useState<string | undefined>(undefined);
+    const [characterValue, setCharacterValue] = useState("");
 
     const onFinish = async (values: any) => {
         setLoading(true);
@@ -43,6 +45,23 @@ export default function App() {
         setLoading(false);
     };
 
+    function toSentenceCase(str: string) {
+        return str
+            .toLowerCase()
+            .replace(/(^\s*\w|[\.\!\?]\s*\w)/g, (c) => c.toUpperCase());
+    }
+    function toCapitalizeEachWord(str: string) {
+        return str.replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+    function toToggleCase(str: string) {
+        return str
+            .split("")
+            .map((c) =>
+                c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()
+            )
+            .join("");
+    }
+
     // Helper to read file text and set into form
     const handleFileUpload = (file: RcFile) => {
         const isTxt = file.type === "text/plain";
@@ -62,6 +81,7 @@ export default function App() {
             const lines = text.split('\n');
             const preview = lines.slice(0, 500).join('\n').slice(0, 20000);
             form.setFieldsValue({ character: preview });
+            setCharacterValue(preview); // Update the character value for TextArea
             message.info("Preview limited to first 500 lines. Full file will be counted.");
         };
         reader.readAsText(file);
@@ -99,26 +119,96 @@ export default function App() {
                             beforeUpload={handleFileUpload}
                             maxCount={1}
                         >
-                            <Button icon={<UploadOutlined />}>Upload</Button>
+                            <Tooltip title="Max 20MB, only .txt file!">
+                                <Button icon={<UploadOutlined />}>Upload</Button>
+                            </Tooltip>
                         </Upload>
                     </Form.Item>
                     <Form.Item className="text-validation" label="Input:" name="character" rules={[{ required: true, message: "Input is required! (any text or character)" }]}>
-                        <TextArea rows={6} placeholder="Paste or type your text here..." />
+                        <TextArea
+                            rows={6}
+                            placeholder="Paste or type your text here..."
+                            value={characterValue}
+                            onChange={e => {
+                                setCharacterValue(e.target.value);
+                                form.setFieldsValue({ character: e.target.value });
+                            }}
+                        />
                     </Form.Item>
                     <Form.Item>
-                        <Space>
-                            <Button type="primary" htmlType="submit" loading={loading}>
-                                Count
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    form.resetFields();
-                                    setResult(null);
-                                    setFullFileText(""); // Clear the full file text
-                                }}
-                            >
-                                Clear
-                            </Button>
+                        <Space style={{ marginBottom: 12 }}>
+                            <Tooltip title="Count the characters in the input text or uploaded file">
+                                <Button type="primary" htmlType="submit" loading={loading}>
+                                    Count
+                                </Button>
+                            </Tooltip>
+                            <Tooltip title="Clear the input and results">
+                                <Button
+                                    onClick={() => {
+                                        form.resetFields();
+                                        setResult(null);
+                                        setFullFileText(""); // Clear the full file text
+                                        setCharacterValue(""); // Clear TextArea value
+                                        setCaseType(undefined); // Reset case type
+                                    }}
+                                >
+                                    Clear
+                                </Button>
+                            </Tooltip>
+                        </Space>
+                        <Space style={{ marginLeft: 10, marginBottom: 12 }}>
+                            <Select
+                                value={caseType}
+                                placeholder="Case Transformation"
+                                allowClear
+                                style={{ width: 180 }}
+                                onChange={setCaseType}
+                                options={[
+                                    { label: "Sentence case", value: "sentence" },
+                                    { label: "lowercase", value: "lower" },
+                                    { label: "UPPERCASE", value: "upper" },
+                                    { label: "Capitalize Each Word", value: "capitalize" },
+                                    { label: "tOGGLE cASE", value: "toggle" },
+                                ]}
+                            />
+                            <Tooltip title="Apply 'Case Transformation' to the input text">
+                                <Button
+                                    type="default"
+                                    disabled={!characterValue.trim()}
+                                    onClick={() => {
+                                        const val = form.getFieldValue("character");
+                                        if (!val || !val.trim()) {
+                                            message.error("Please add input.");
+                                            return;
+                                        }
+                                        let newText = val;
+                                        switch (caseType) {
+                                            case "sentence":
+                                                newText = toSentenceCase(val);
+                                                break;
+                                            case "lower":
+                                                newText = val.toLowerCase();
+                                                break;
+                                            case "upper":
+                                                newText = val.toUpperCase();
+                                                break;
+                                            case "capitalize":
+                                                newText = toCapitalizeEachWord(val);
+                                                break;
+                                            case "toggle":
+                                                newText = toToggleCase(val);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        form.setFieldsValue({ character: newText });
+                                        setCharacterValue(newText);  // Update TextArea value
+                                        setFullFileText(""); // Optional: remove full file if user edits
+                                    }}
+                                >
+                                    Apply
+                                </Button>
+                            </Tooltip>
                         </Space>
                     </Form.Item>
                 </Form>

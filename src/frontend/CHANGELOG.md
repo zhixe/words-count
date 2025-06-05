@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.8] - 2025-06-05
+### Added
+- **Case Transformation Dropdown:** Added dropdown menu for sentence case, lowercase, UPPERCASE, Capitalize Each Word, and tOGGLE cASE above the input area.
+- **Apply Button:** "Apply" button applies the selected transformation to the input text; includes validation to ensure input is present.
+- **Clear Option:** Dropdown now supports a clear (mini "x") icon to reset selection back to default placeholder ("Case Transformation").
+- **Tooltips:** Added tooltips to all interactive controls for better accessibility and user guidance.
+
+### Changed
+- **Apply Button State:** Button is now disabled if no input text or no transformation is selected.
+- **Clear Button Behavior:** "Clear" now resets the text input, result, and also resets the case transformation dropdown to its placeholder/default state.
+
+### Fixed
+- Ensured all input and transformation edge cases are handled smoothly, providing appropriate validation and error feedback to users.
+
 ## [0.0.7] - 2025-06-04
 ### Added
 - **Footer now displays both version and full formatted date**: Date is extracted from `CHANGELOG.md` and automatically shown as “Month Day, Year” (e.g., “June 4, 2025”) in the frontend.

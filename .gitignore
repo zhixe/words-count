@@ -17,4 +17,4 @@ node_modules/
 .idea/
 .DS_Store
 
-/.gitignore
+/src/frontend/.gitignore

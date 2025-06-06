@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.0] - 2025-06-06
+### Added
+- **Auto Tag and Release:** Added automatic tagging and release creation using `sync-version.js` script. This script now updates the version in `CHANGELOG.md`, `package.json`, and `README.md` files, and creates a Git tag for each new version.
+
+### Changed
+- **Versioning Workflow:** Updated versioning workflow to ensure all files are in sync with the latest version from `CHANGELOG.md`. The script now runs automatically on each commit to `master` or `dev` branches, ensuring the latest version is always tagged and released.
+
+### Fixed
+- **Release Process:** Fixed issues with the release process where the version was not being updated correctly across all files. The new script ensures that the version is consistently updated and tagged in Git.
+
 ## [0.0.9] - 2025-06-05
 ### Added
 - **Per-word tOGGLE cASE:** The tOGGLE cASE transformation now changes each word so the first character is lowercase and the rest are uppercase (e.g., "HELLO WORLD" → "hELLO wORLD"). Repeatedly clicking "Apply" toggles between the transformed and original states without resetting the dropdown.

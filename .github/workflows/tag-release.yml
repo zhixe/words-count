@@ -1,11 +1,11 @@
-name: Auto Tag and Release
+name: Auto Tag Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ] # or main, or whichever branch you want
 
 jobs:
-  tag-and-release:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,11 +14,7 @@ jobs:
         id: changelog
         run: |
           VERSION=$(grep -m1 -Po '(?<=## \[)[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md)
-          NOTES=$(awk '/^## \['"$VERSION"'\]/{flag=1; next} /^## \[/{flag=0} flag' CHANGELOG.md)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
 
       - name: Create and push tag if not exists
         run: |
@@ -30,15 +26,3 @@ jobs:
             git tag v$VERSION
             git push origin v$VERSION
           fi
-
-      - name: Fetch tags (ensure GH runner sees it)
-        run: git fetch --tags
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ env.VERSION }}
-          name: v${{ env.VERSION }}
-          body: ${{ env.RELEASE_NOTES }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

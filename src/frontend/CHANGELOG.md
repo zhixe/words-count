@@ -1,5 +1,9 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+---
+
 ## [0.0.10] - 2025-06-06
 ### Added
 - **Auto Tag and Release:** Added automatic tagging and release creation using `sync-version.js` script. This script now updates the version in `CHANGELOG.md`, `package.json`, and `README.md` files, and creates a Git tag for each new version.

@@ -27,6 +27,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Commit updated files (if changed)
+        working-directory: src/frontend
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com

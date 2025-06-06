@@ -1,13 +1,18 @@
-# Ignore JetBrains IDE settings
-.idea/
+# Ignore all .env files
+.env*
+**/.env*
 
-# Ignore all .env files in subdirectories (but not the root one)
-**/.env
+# Ignore lock files
+package-lock.json
+yarn.lock
 
-**/.exe
+# Ignore build and output folders
+dist/
+build/
 
+# Ignore node modules
 node_modules/
 
-package-lock.json/
-
-dist/
+# IDE and OS-specific
+.idea/
+.DS_Store

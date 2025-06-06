@@ -16,3 +16,5 @@ node_modules/
 # IDE and OS-specific
 .idea/
 .DS_Store
+
+/.gitignore

@@ -10,7 +10,7 @@ if (!match) {
 const changelogVersion = match[1];
 
 // 2. Update version in package.json if needed
-const pkgPath = "package.json";
+const pkgPath = "frontend/package.json";
 const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
 if (pkg.version !== changelogVersion) {
     pkg.version = changelogVersion;

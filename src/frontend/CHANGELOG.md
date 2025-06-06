@@ -3,7 +3,6 @@
 ## [0.0.10] - 2025-06-06
 ### Added
 - **Auto Tag and Release:** Added automatic tagging and release creation using `sync-version.js` script. This script now updates the version in `CHANGELOG.md`, `package.json`, and `README.md` files, and creates a Git tag for each new version.
-- **Versioning Workflow:** Introduced a new versioning workflow that ensures all files are in sync with the latest version from `CHANGELOG.md`. The script runs automatically on each commit to `master` or `dev` branches, ensuring the latest version is always tagged and released.
 
 ### Changed
 - **Versioning Workflow:** Updated versioning workflow to ensure all files are in sync with the latest version from `CHANGELOG.md`. The script now runs automatically on each commit to `master` or `dev` branches, ensuring the latest version is always tagged and released.

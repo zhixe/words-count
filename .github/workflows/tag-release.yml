@@ -13,7 +13,6 @@ jobs:
       - name: Install deps and sync version
         working-directory: src/frontend
         run: |
-          npm install
           npm run sync-version
 
       - name: Extract version from CHANGELOG.md
@@ -33,6 +32,7 @@ jobs:
           git config user.email github-actions@github.com
           git add package.json README.md # add any other files your script changes
           git diff --cached --quiet || git commit -m "🧹 Chore: sync version to $VERSION"
+          git pull
           git push
 
       - name: Create and push tag if not exists

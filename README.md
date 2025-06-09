@@ -1,6 +1,6 @@
 ## Branches
 ![version](https://img.shields.io/github/v/tag/zhixe/words-count?color=orange&label=version)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/db204803-2e19-4fb4-a72e-cf7ed12523bf/deploy-status)](https://app.netlify.com/projects/auto-words-count/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/db204803-2e19-4fb4-a72e-cf7ed12523bf/deploy-status)](https://app.netlify.com/projects/project-1-character-count/deploys)
 
 | Branch  | Purpose              | Status   |
 |---------|----------------------|----------|

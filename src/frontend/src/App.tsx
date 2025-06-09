@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {Button, Select, Typography, Form, Card, Space, message, Tooltip} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import "./App.css";
@@ -46,6 +46,17 @@ export default function App() {
         }
         setLoading(false);
     };
+
+    useEffect(() => {
+        // Block right-click, copy, cut, paste
+        const prevent = (e: Event) => e.preventDefault();
+
+        document.addEventListener("contextmenu", prevent);
+
+        return () => {
+            document.removeEventListener("contextmenu", prevent);
+        };
+    }, []);
 
     function toSentenceCase(str: string) {
         return str

@@ -58,6 +58,21 @@ export default function App() {
         };
     }, []);
 
+    // Log a message to the console for developers
+    useEffect(() => {
+        if (
+            typeof window !== "undefined" &&
+            window.console &&
+            !window.__hasShownEasterEgg
+        ) {
+            const mainStyle = "color: #64ffda; font-size: 12px; font-weight: bold;";
+            const footerStyle = "color: #aaa; font-style: italic;";
+            console.log("%cYo dude, what are you doing here?!", mainStyle);
+            console.log("%c— Am", footerStyle);
+            window.__hasShownEasterEgg = true; // Mark as shown for this session
+        }
+    }, []);
+
     function toSentenceCase(str: string) {
         return str
             .toLowerCase()

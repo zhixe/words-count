@@ -119,7 +119,7 @@ export default function App() {
         <div className="container">
             <Card style={{ width: 750 }}>
                 <Title level={2} style={{ textAlign: "center" }}>
-                    Character Count
+                    Characters Count
                 </Title>
                 <Form
                     layout="vertical"

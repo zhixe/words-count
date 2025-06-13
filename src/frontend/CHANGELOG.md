@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.0.11] - 2025-06-13
+### Added
+- **CSP Whitelist Enhancement:** Updated Netlify `_headers` to allow connections to `https://words-count-production.up.railway.app` for API requests. This fixes connection issues for production deployments.
+- **Deprecation Warning Documentation:** Added guidance in developer documentation regarding suppression of the `-ms-high-contrast` deprecation warning and migration to `forced-colors` for accessibility CSS.
+
+### Changed
+- **Dependencies:** Upgraded dependencies for improved browser compatibility and to reduce deprecated CSS features.
+
+### Fixed
+- **CSP Policy Error:** Fixed frontend/backend connectivity issues due to restrictive Content Security Policy.
+- **Release Badge:** Minor adjustments to release badge in README for accuracy with new versioning.
+
 ## [0.0.10] - 2025-06-06
 ### Added
 - **Auto Tag and Release:** Added automatic tagging and release creation using `sync-version.js` script. This script now updates the version in `CHANGELOG.md`, `package.json`, and `README.md` files, and creates a Git tag for each new version.

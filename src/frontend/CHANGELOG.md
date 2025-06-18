@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - **CSP Policy Error:** Fixed frontend/backend connectivity issues due to restrictive Content Security Policy.
-- **Release Badge:** Minor adjustments to release badge in README for accuracy with new versioning.
+  - **Release Badge:** Minor adjustments to release badge in README for accuracy with new versioning.
 
 ## [0.0.10] - 2025-06-06
 ### Added
